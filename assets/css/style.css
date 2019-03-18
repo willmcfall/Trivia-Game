@@ -1,0 +1,67 @@
+body{
+    font-family: 'Permanent Marker', cursive;
+    background-color:#1c001f;
+    height: 100%;
+    background-image: url("../images/cloth-alike.png");
+    background-repeat: repeat;
+}
+
+h1{
+    font-size: 36px;
+}
+
+h2{
+    font-size: 32px;
+}
+    
+
+h3{
+    font-size: 28px;
+}
+
+h4{
+    font-size: 24px;
+}
+
+p{
+    font-size: 20px;
+}
+
+
+.question{
+
+    font-size: 32px;
+    color:wheat;
+    padding: 10px;
+}
+
+.answer{
+
+    font-size: 32px;
+    color:wheat;
+    padding: 10px;
+}
+
+
+.timer{
+
+    font-size: 32px;
+    color:white;
+    padding: 10px;
+}
+
+
+
+
+#container_custom{
+    background-color:rgba(0, 96, 140,0.6);
+    padding: 50px;
+}
+
+
+#heading_custom{
+    text-align: center;
+    padding: 20px;
+    color: white;
+}
+
