@@ -6,13 +6,19 @@ $(document).ready(function () {
         method: "GET"
     }).then(function (triviaData) {
 
+        // initiate global variables
 
         var numCorrect = 0;
         var numIncorrect = 0;
         var userChoice = 0;
 
-        // present start screen and wait for click of start button
+        // present start page and wait for click of start button
 
+        $("#start").click(function() {
+        
+        // hides the start page and unhides the question page 
+        $("#first_page").addClass('d-none');
+        $("#second_page").removeClass('d-none');
 
         // randomly presents question
 
@@ -51,9 +57,11 @@ $(document).ready(function () {
 
 
 
+        // start button closing tag
+        });
 
-
-
+    // API closing tag
     });
 
+// document ready closing tag
 });

@@ -36,52 +36,60 @@
       <div class="col-sm-1">
       </div>
       <div class="col-sm-10">
-        <div class="row timer">
 
-          Time Remaining:
-
-        </div>
-
-        <div class="row question">
-
-          Question:
-
-        </div>
-
-
-
-
-        <div class="row answer" value=1 id="1">
-
-          1:
-
-        </div>
-
-        <div class="row answer" value=2 id="2">
-
-          2:
-
-        </div>
-
-        <div class="row answer" value=3 id="3">
-
-          3:
-
-        </div>
-
-        <div class="row answer" value=4 id="4">
-
-          4:
-
-        </div>
-
-        <div>
+        <div id="first_page">
+          <h1>
+            Instructions
+          </h1>
+          <p>
+            This game will present 15 questions related to music history. You will be presented with 4 choices for each
+            question, 1 of the choices is the correct answer and the remaining 3 choices are incorrect. You will
+            be given 30 seconds to select and submit a response. Your response will be checked against the correct
+            resposne and logged as either correct or incorrect.
+            If you are unable to submit a response within 30 seconds your question will be counted as incorrect. Please
+            press the start button below to begin the game.
+          </p>
           <br>
-          <button type="button" class="btn btn-primary">Submit</button>
-
+          <button type="button" class="btn btn-primary" id="start">Start</button>
+          <br>
         </div>
 
 
+        <div class="d-none" id="second_page">
+
+          <div class="row timer">
+          </div>
+
+          <div class="row question">
+          </div>
+
+          <div class="row answer" value=1 id="1">
+          </div>
+
+          <div class="row answer" value=2 id="2">
+          </div>
+
+          <div class="row answer" value=3 id="3">
+          </div>
+
+          <div class="row answer" value=4 id="4">
+          </div>
+
+          <div>
+            <br>
+            <button type="button" class="btn btn-primary">Submit</button>
+            <br>
+          </div>
+        </div>
+
+        <div class="d-none" id="third_page">
+            <h1>
+              Congratulations
+            </h1>
+            <p>
+              This areas wil present the wins and losses
+            </p>
+          </div>
 
       </div>
       <div class="col-sm-1"></div>
