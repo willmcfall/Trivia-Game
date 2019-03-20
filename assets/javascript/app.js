@@ -1,67 +1,135 @@
 
+// waits for the html document to load
 $(document).ready(function () {
 
+    // loads the trivia JSON data
     $.ajax({
         url: "https://opentdb.com/api.php?amount=40&category=12&difficulty=hard&type=multiple",
         method: "GET"
     }).then(function (triviaData) {
 
-        // initiate global variables
-
+        // initiates global variables
         var numCorrect = 0;
         var numIncorrect = 0;
-        var userChoice = 0;
 
         // present start page and wait for click of start button
+        $("#start").click(function () {
 
-        $("#start").click(function() {
-        
-        // hides the start page and unhides the question page 
-        $("#first_page").addClass('d-none');
-        $("#second_page").removeClass('d-none');
+            // hides the start page and unhides the question page 
 
-        // randomly presents question
+            $("#first_page").addClass('d-none');
+            $("#second_page").removeClass('d-none');
 
-        var randQuestion = Math.floor(Math.random() * triviaData.results.length);
-        console.log(triviaData.results.length);
-        console.log(randQuestion);
+            // generates 10 rounds of question pages
+            function newPage() {
+                for (y = 1; y < 11; y++) {
 
-        $(".question").html("Question: " + triviaData.results[randQuestion].question);
-        $("#1").html("1: " + triviaData.results[randQuestion].correct_answer);
+                    var userChoice = "";
+                    var randQuestion = 0;
+
+                    // starts a timer that runs for thirty seconds
+                    var number;
+                    var intervalId;
+                    number = 30;
+                    function run() {
+                        clearInterval(intervalId);
+                        intervalId = setInterval(decrement, 1000);
+                    }
+
+                    function decrement() {
+
+                        number--;
+
+                        $(".timer").html("Time Remaining: " + number);
+
+                        if (number === 0) {
+
+                            stop();
+                            alert("Sorry, you ran out of time!");
+                        }
+                    }
+
+                    function stop() {
+                        clearInterval(intervalId);
+                    }
+
+                    run();
 
 
-        // randomly orders answer options
+                    // randomly presents question
 
-        var randAnswer = Math.floor(Math.random() * 4);
-        console.log(randAnswer);
+                    var randQuestion = Math.floor(Math.random() * triviaData.results.length);
+                    console.log(triviaData.results.length);
+                    console.log(randQuestion);
 
-        $("#2").html("2: " + triviaData.results[randQuestion].incorrect_answers[0]);
-        $("#3").html("3: " + triviaData.results[randQuestion].incorrect_answers[1]);
-        $("#4").html("4: " + triviaData.results[randQuestion].incorrect_answers[2]);
+                    $(".question").html("Question: " + triviaData.results[randQuestion].question);
 
-        // wait for user to select answer option 
-        $(".answer").on("click", function () {
-            $(this).val = userChoice;
+                    // randomly orders answer options
+                    var shuffledArray = triviaData.results[randQuestion].incorrect_answers;
+                    shuffledArray.push(triviaData.results[randQuestion].correct_answer);
+                    console.log(shuffledArray);
+
+                    function shuffle(a) {
+                        var j, x, i;
+                        for (i = a.length - 1; i > 0; i--) {
+                            j = Math.floor(Math.random() * (i + 1));
+                            x = a[i];
+                            a[i] = a[j];
+                            a[j] = x;
+                        }
+                        return a;
+                    }
+
+                    shuffle(shuffledArray);
+                    console.log(shuffledArray);
+                    $("#1").html("1: " + shuffledArray[0]);
+                    $("#2").html("2: " + shuffledArray[1]);
+                    $("#3").html("3: " + shuffledArray[2]);
+                    $("#4").html("4: " + shuffledArray[3]);
+
+
+                    // wait for user to select answer option 
+                    $(".answer").on("click", function () {
+                        userChoice = $(this).html();
+                        userChoice = userChoice.replace("1: ", "");
+                        userChoice = userChoice.replace("2: ", "");
+                        userChoice = userChoice.replace("3: ", "");
+                        userChoice = userChoice.replace("4: ", "");
+                    });
+
+
+                    // wait for user to select submit
+                    $("#submit").click(function () {
+
+                        // check if user selection is the correct answer and count correct responses and incorrect responses
+                        console.log(userChoice);
+                        console.log(triviaData.results[randQuestion].correct_answer);
+
+                        if (userChoice == triviaData.results[randQuestion].correct_answer) {
+                            numCorrect++;
+                            console.log("Number correct = " + numCorrect);
+                            alert("Correct!")
+                            newPage();
+                        }
+                        else if (userChoice !== triviaData.results[randQuestion].correct_answer || number == 0) {
+                            numIncorrect++;
+                            console.log("NUmber incorrect = " + numIncorrect);
+                            alert("Incorrect, the correct response was " + triviaData.results[randQuestion].correct_answer + "!");
+                            newPage();
+                        }
+                    });
+
+                };
+
+            // new page function closing tag
+            };
+            newPage();
+
+        // start function closing tag
         });
 
-        // wait for user to select submit
-
-
-        // check if user selection is the correct answer and count correct responses and incorrect responses
-
-
-
-        // present restart screen
-
-
-
-
-
-        // start button closing tag
-        });
-
-    // API closing tag
+    // API function closing tag
     });
 
-// document ready closing tag
+// document ready function closing tag
 });
