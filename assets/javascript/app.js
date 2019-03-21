@@ -68,8 +68,6 @@ $(document).ready(function () {
                 userChoice = userChoice.replace("4: ", "");
                 answer = triviaData.results[randQuestion].correct_answer;
             });
-
-            // new page function closing tag
         };
 
         // wait for user to select submit
@@ -79,32 +77,40 @@ $(document).ready(function () {
             console.log(answer);
             // check if user selection is the correct answer and count correct responses and incorrect responses
 
-            if (userChoice == answer) {
-                alert("Correct!");
-                userChoice = "";
-                answer = "";
-                numCorrect++;
-                counter++;
-                console.log("Number correct = " + numCorrect);
-                
-            }
-            else if (userChoice !== answer) {
+            if (userChoice != "") {
 
-                alert("Incorrect! The correct response is " + answer);
-                userChoice = "";
-                answer = "";
-                numIncorrect++;
-                counter++;
-                console.log("Number incorrect = " + numIncorrect);
-                
+                if (userChoice == answer) {
+                    alert("Correct!");
+                    userChoice = "";
+                    answer = "";
+                    numCorrect++;
+                    counter++;
+                    console.log("Number correct = " + numCorrect);
+
+                }
+                else if (userChoice !== answer) {
+
+                    alert("Incorrect! The correct response is " + answer);
+                    userChoice = "";
+                    answer = "";
+                    numIncorrect++;
+                    counter++;
+                    console.log("Number incorrect = " + numIncorrect);
+
+
+                };
+
+                if (counter < 5) {
+                    secondPageFunction();
+                }
+                else {
+                    thirdPageFunction();
+                }
+
+            }
+            else if (userChoice == "") {
+                alert("Please select a value!")
             };
-
-            if(counter < 5){
-                secondPageFunction();
-            }
-            else{
-                thirdPageFunction();  
-            } 
 
         });
 
@@ -113,12 +119,18 @@ $(document).ready(function () {
 
             $("#first_page").addClass('d-none');
             $("#second_page").addClass('d-none');
-            $("#third_page").removeClass('d-none');   
-            $("#close_1").html("Number of Correct Responses: " + numCorrect);
-            $("#close_2").html("NUmber of Incorrect Responses: " + numIncorrect);
+            $("#third_page").removeClass('d-none');
+            $("#final_correct").html("Number of Correct Responses: " + numCorrect);
+            $("#final_incorrect").html("NUmber of Incorrect Responses: " + numIncorrect);
             counter = 0;
         };
 
+        $("#restart").on("click", function () {
+            $("#first_page").addClass('d-none');
+            $("#second_page").removeClass('d-none');
+            $("#third_page").addClass('d-none');
+            secondPageFunction();
+        })
 
         // API function closing tag
     });

@@ -7,7 +7,9 @@ body{
 }
 
 h1{
-    font-size: 36px;
+    font-size: 32px;
+    color:white;
+    padding: 10px;
 }
 
 h2{
@@ -55,11 +57,6 @@ p{
 }
 
 
-.instruction{
-    font-size: 32px;
-    color:white;
-    padding: 10px;
-}
 
 .close{
 
@@ -79,4 +76,11 @@ p{
     color: white;
 }
 
+#final_correct{
+    color:wheat;
+}
 
+#final_incorrect{
+    color:wheat;
+}
+    
