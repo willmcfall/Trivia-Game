@@ -100,7 +100,7 @@ $(document).ready(function () {
 
                 };
 
-                if (counter < 5) {
+                if (counter < 10) {
                     secondPageFunction();
                 }
                 else {
