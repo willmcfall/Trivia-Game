@@ -14,6 +14,8 @@ $(document).ready(function () {
         var userChoice = "";
         var answer = "";
         var counter = 0;
+        var count = 0;
+        var iterator = 0;
 
         // present start page and wait for click of start button
         $("#start").click(function firstPageFunction() {
@@ -29,7 +31,10 @@ $(document).ready(function () {
         function secondPageFunction() {
 
             // starts a timer that runs for thirty seconds
-
+            clearInterval(counter);
+            count = 30;
+            counter = setInterval(timer, 1000);
+            timer();
 
             // randomly draws a question from the larger array question
             var randQuestion = Math.floor(Math.random() * triviaData.results.length);
@@ -84,7 +89,7 @@ $(document).ready(function () {
                     userChoice = "";
                     answer = "";
                     numCorrect++;
-                    counter++;
+                    iterator++;
                     console.log("Number correct = " + numCorrect);
 
                 }
@@ -94,13 +99,13 @@ $(document).ready(function () {
                     userChoice = "";
                     answer = "";
                     numIncorrect++;
-                    counter++;
+                    iterator++;
                     console.log("Number incorrect = " + numIncorrect);
 
 
                 };
 
-                if (counter < 10) {
+                if (iterator < 10) {
                     secondPageFunction();
                 }
                 else {
@@ -131,6 +136,19 @@ $(document).ready(function () {
             $("#third_page").addClass('d-none');
             secondPageFunction();
         })
+
+
+        function timer() {
+            count = count - 1;
+            if (count <= 0) {
+                alert("You ran out of time!");
+                numIncorrect++;
+                iterator++;
+                secondPageFunction();
+                return;
+            }
+            $(".timer").html("Time Remaining: " + count);
+        }
 
         // API function closing tag
     });
